@@ -9,13 +9,9 @@ private:
 public:
   points() { x, y, z = 0; }
 
-  points(float a, float b, float c) {
-    x = a;
-    y = b;
-    z = c;
-  };
+  points(float a, float b, float c) : x(a), y(b), z(c){};
 
-  points oposite() {
+  points oposite() const {
     points ops;
     ops.x = -x;
     ops.y = -y;
@@ -24,14 +20,14 @@ public:
     return ops;
   }
 
-  float Distance(points p2) {
+  float Distance(points p2) const {
     float dist;
     dist = sqrt(pow(p2.x - x, 2) + pow(p2.y - y, 2) + pow(p2.z - z, 2));
 
     return dist;
   }
 
-  void visualize() { printf("(%.0f,%.0f,%.0f)\n", x, y, z); }
+  void visualize() const { printf("(%.0f,%.0f,%.0f)\n", x, y, z); }
 };
 
 int main() {

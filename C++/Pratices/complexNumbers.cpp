@@ -7,25 +7,22 @@ private:
   float re, img;
 
 public:
-  complexNumbers(float a, float b) {
-    re = a;
-    img = b;
-  }
+  complexNumbers(float a, float b) : re(a), img(b) {}
 
-  float module() {
+  float module() const {
     float mod;
     mod = sqrt(re * re + img * img);
 
     return mod;
   }
 
-  complexNumbers conjugate() {
+  complexNumbers conjugate() const {
     complexNumbers conj(re, -img);
 
     return conj;
   }
 
-  complexNumbers sum(complexNumbers c2) {
+  complexNumbers sum(complexNumbers c2) const {
     float a, b;
     a = re + c2.re;
     b = img + c2.img;
@@ -35,7 +32,7 @@ public:
     return result;
   }
 
-  complexNumbers subtraction(complexNumbers c2) {
+  complexNumbers subtraction(complexNumbers c2) const {
     float a, b;
     a = re - c2.re;
     b = img - c2.img;
@@ -45,7 +42,7 @@ public:
     return result;
   }
 
-  complexNumbers multiplication(complexNumbers c2) {
+  complexNumbers multiplication(complexNumbers c2) const {
     float a, b;
 
     a = re * c2.re - img * c2.img;
@@ -56,7 +53,7 @@ public:
     return result;
   }
 
-  complexNumbers division(complexNumbers c2) {
+  complexNumbers division(complexNumbers c2) const {
     float a, b;
     complexNumbers c3(a, b);
 
@@ -81,7 +78,7 @@ public:
 int main() {
   complexNumbers c1(1, 1), c2(1, 1);
 
-  complexNumbers c3 = c1.division(c2);
+  complexNumbers c3 = c1.conjugate();
   c3.print();
 
   return 0;
