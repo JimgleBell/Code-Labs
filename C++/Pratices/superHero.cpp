@@ -18,7 +18,7 @@ class character {
 private:
   string name;
   string realName;
-  vector<superPower *>
+  vector<superPower>
       powers; // Warning !! The atribute of the object is an address, so when
               // you copy this you must be carefull about destructors
 
@@ -26,21 +26,19 @@ protected:
   character(string n, string rn) : name(n), realName(rn){};
 
 public:
-  bool addPower(superPower x) {
-    superPower *aux;
-    aux = &x;
+  bool addPower(superPower &x) {
     if (powers.size() >= 4) {
       return false;
     } else if (powers.size() < 4) {
-      powers.push_back(aux);
+      powers.push_back(x);
       return true;
     }
   }
 
-  double getTotalPower() {
+  virtual double getTotalPower() {
     double sum = 0;
     for (size_t i = 0; i < powers.size(); i++) {
-      sum += powers[i]->getLevel();
+      sum += powers[i].getLevel();
     }
     return sum;
   }
@@ -79,7 +77,7 @@ public:
 
 class combat {
 public:
-  string confront(superHero x, superVilain y) {
+  string confront(character &x, character &y) {
     if (x.getTotalPower() > y.getTotalPower()) {
       return (x.getName() + " Won the fight !");
     } else if (x.getTotalPower() < y.getTotalPower()) {
@@ -165,23 +163,23 @@ int main() {
       cout << combat().confront(herois[i], viloes[j]) << endl;
     }
 
-  // for (int i = 0; i < 6; i++)
-  //   for (int j = i; j < 6; j++) {
-  //     cout << herois[i].getName();
-  //     cout << " X ";
-  //     cout << herois[j].getName();
-  //     cout << " -> ";
+  for (int i = 0; i < 6; i++)
+    for (int j = i; j < 6; j++) {
+      cout << herois[i].getName();
+      cout << " X ";
+      cout << herois[j].getName();
+      cout << " -> ";
 
-  //     cout << combat().confront(herois[i], herois[j]) << endl;
-  //   }
+      cout << combat().confront(herois[i], herois[j]) << endl;
+    }
 
-  // for (int i = 0; i < 4; i++)
-  //   for (int j = i; j < 4; j++) {
-  //     cout << viloes[i].getNome();
-  //     cout << " X ";
-  //     cout << viloes[j].getNome();
-  //     cout << " -> ";
+  for (int i = 0; i < 4; i++)
+    for (int j = i; j < 4; j++) {
+      cout << viloes[i].getName();
+      cout << " X ";
+      cout << viloes[j].getName();
+      cout << " -> ";
 
-  //     cout << Confronto().executar(viloes[i], viloes[j]) << endl;
-  //   }
+      cout << combat().confront(viloes[i], viloes[j]) << endl;
+    }
 }
